@@ -1,0 +1,9 @@
+*.class
+*.log
+dist/*
+target/
+.idea/*
+.DS_Store
+.cache
+.history
+.lib/
