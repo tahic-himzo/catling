@@ -1,9 +1,20 @@
 package eval
 
-import cats.effect.IO
+import cats.effect.{Concurrent, IO, Timer}
+import eval.latency.{Latency, LatencyEvaluator}
+import eval.statuscode.{StatusCodeEvaluator, StatusCodesResult}
 import fs2.Pipe
-import sttp.client.Response
+import http.TimedResponse
+
+import scala.concurrent.duration._
 
 object Evaluators {
-  def response: Pipe[IO, Response[String], Status] = _.map(v => Status(v.code.toString))
+
+  def latency(interval: FiniteDuration)(implicit t: Timer[IO], c: Concurrent[IO]): Pipe[IO, TimedResponse[String], Latency] =
+    new LatencyEvaluator(interval).pipe
+
+  def responseCodes(
+      interval: FiniteDuration)(implicit t: Timer[IO], c: Concurrent[IO]): Pipe[IO, TimedResponse[String], StatusCodesResult] =
+    new StatusCodeEvaluator(interval).pipe
+
 }
