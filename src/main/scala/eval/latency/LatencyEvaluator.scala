@@ -1,14 +1,23 @@
 package eval.latency
 
 import cats.effect.{Concurrent, IO, Timer}
-import fs2.Pipe
+import eval.Evaluator
+import fs2.Stream
 import http.TimedResponse
 
 import scala.concurrent.duration._
 
-class LatencyEvaluator(interval: FiniteDuration)(implicit t: Timer[IO], c: Concurrent[IO]) {
+class LatencyEvaluator(interval: FiniteDuration)(implicit t: Timer[IO], c: Concurrent[IO]) extends Evaluator[Latency] {
 
-  val pipe: Pipe[IO, TimedResponse[String], Latency] = in =>
+  override val empty: Latency = Latency(
+    P99(0.milliseconds),
+    P95(0.milliseconds),
+    P90(0.milliseconds),
+    P75(0.milliseconds),
+    P50(0.milliseconds)
+  )
+
+  override def apply(in: Stream[IO, TimedResponse[String]]): fs2.Stream[IO, Latency] =
     in.groupWithin(Int.MaxValue, interval)
       .map(
         c => {
@@ -24,4 +33,5 @@ class LatencyEvaluator(interval: FiniteDuration)(implicit t: Timer[IO], c: Concu
 
   private def getPercentile(sortedLatencies: Array[Long], p: Int): FiniteDuration =
     math.ceil((sortedLatencies.length - 1) * (p / 100.0)).toInt.milliseconds
+
 }
