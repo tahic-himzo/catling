@@ -1,8 +1,12 @@
 package exec
 
-import cats.effect.IO
-import fs2.Pipe
+import io.circe.Encoder
 
 import scala.concurrent.duration.FiniteDuration
 
-case class ExecutionStep[T, S](step: Pipe[IO, T, S], duration: FiniteDuration)
+case class ExecutionStep[T: Encoder, S](executor: Executor[T, S], duration: FiniteDuration) {
+
+  val totalRequests: Long = executor match {
+    case constantRps: ConstantRpsExecutor[T] => constantRps.rps * duration.toSeconds
+  }
+}

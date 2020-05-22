@@ -2,6 +2,7 @@ package eval.statuscode
 
 import cats.effect.{Concurrent, IO, Timer}
 import cats.implicits._
+import eval.statuscode.model.{StatusCodes, StatusCodesResult}
 import fs2.Pipe
 import http.TimedResponse
 

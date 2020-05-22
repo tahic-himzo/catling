@@ -4,10 +4,10 @@ import cats.data.NonEmptyList
 import cats.effect._
 import ds.DataSources
 import eval.Evaluators
-import eval.statuscode.StatusCodesResult
+import eval.statuscode.model.StatusCodesResult
 import exec._
 import fs2.Stream
-import http.{HttpClient, Request, TimedResponse}
+import http.{HttpClient, Request}
 import io.circe.Json
 import prep.DataPreps
 
@@ -20,15 +20,13 @@ object DummyLoadTest {
     val ds   = DataSources.const(DummyRequest.get(batchSize))
     val prep = DataPreps.passThrough[Request[Json]]
 
-    val execFactory = new ExecutorFactory(httpClient)
-    val exec = execFactory.from[Request[Json], TimedResponse[String]](
+    val exec = Executor.fromAlt[Json, String](
       NonEmptyList.of(
-        ExecutionStep(execFactory.constantRPS(10), 10.seconds)
-        //ExecutionStep(execFactory.constantRPS(20), 10.seconds),
-        //ExecutionStep(execFactory.constantRPS(30), 10.seconds)
+        ExecutionStep(new ConstantRpsExecutor(httpClient, 10), 10.seconds),
+        ExecutionStep(new ConstantRpsExecutor(httpClient, 15), 10.seconds)
       )
     )
-    val eval = Evaluators.responseCodes(5.seconds)
+    val eval = Evaluators.responseCodes(interval = 5.seconds)
     LoadTest.from(ds, prep, exec, eval)
   }
 

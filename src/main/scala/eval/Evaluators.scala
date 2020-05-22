@@ -2,7 +2,8 @@ package eval
 
 import cats.effect.{Concurrent, IO, Timer}
 import eval.latency.{Latency, LatencyEvaluator}
-import eval.statuscode.{StatusCodeEvaluator, StatusCodesResult}
+import eval.statuscode.StatusCodeEvaluator
+import eval.statuscode.model.StatusCodesResult
 import fs2.Pipe
 import http.TimedResponse
 
