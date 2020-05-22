@@ -27,9 +27,8 @@ object DummyLoadTest {
         ExecutionStep(new ConstantRpsExecutor(httpClient, 15), 10.seconds)
       )
     )
-    val statusCodeEval = Evaluator.responseCodes(interval = 5.seconds)
-    val latencyEval    = Evaluator.latency(interval       = 5.seconds)
-    LoadTest.from(ds, prep, exec, statusCodeEval, latencyEval)
+    val eval = Evaluator.default
+    LoadTest.from(ds, prep, exec, 5.seconds, eval)
   }
 
 }
