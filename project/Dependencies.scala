@@ -18,7 +18,7 @@ object Dependencies {
     "io.circe"                     %% "circe-parser"                   % circeVersion,
     "io.circe"                     %% "circe-fs2"                      % circeFs2Version,
     "co.fs2"                       %% "fs2-core"                       % fs2Version,
-    "com.opencsv"                  % "opencsv"                         % openCsvVersion
+    "com.opencsv"                  % "opencsv"                         % openCsvVersion,
     "org.tpolecat"                 %% "doobie-core"                    % doobieVersion
   )
 }
