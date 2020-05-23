@@ -1,6 +1,6 @@
-package main
+package com.catling.dummy
 
-import http.Request
+import com.catling.internal.http.Request
 import io.circe.Json
 import sttp.model.Uri.UriContext
 

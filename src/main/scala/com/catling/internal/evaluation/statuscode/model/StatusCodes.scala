@@ -1,4 +1,4 @@
-package eval.statuscode.model
+package com.catling.internal.evaluation.statuscode.model
 
 import cats.Show
 import cats.syntax.show.toShow

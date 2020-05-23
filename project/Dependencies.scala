@@ -6,6 +6,8 @@ object Dependencies {
   val catsEffectVersion = "2.1.3"
   val sttpVersion       = "2.1.1"
   val fs2Version        = "2.2.1"
+  val openCsvVersion    = "5.2"
+  val doobieVersion     = "0.9.0"
 
   lazy val appDeps = Seq(
     "org.typelevel"                %% "cats-effect"                    % catsEffectVersion,
@@ -15,6 +17,8 @@ object Dependencies {
     "io.circe"                     %% "circe-core"                     % circeVersion,
     "io.circe"                     %% "circe-parser"                   % circeVersion,
     "io.circe"                     %% "circe-fs2"                      % circeFs2Version,
-    "co.fs2"                       %% "fs2-core"                       % fs2Version
+    "co.fs2"                       %% "fs2-core"                       % fs2Version,
+    "com.opencsv"                  % "opencsv"                         % openCsvVersion
+    "org.tpolecat"                 %% "doobie-core"                    % doobieVersion
   )
 }

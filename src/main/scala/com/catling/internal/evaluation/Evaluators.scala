@@ -1,23 +1,20 @@
-package eval
+package com.catling.internal.evaluation
 
 import cats.effect.IO
-import eval.latency.{Latency, LatencyEvaluator}
-import eval.statuscode.StatusCodeEvaluator
-import eval.statuscode.model.StatusCodesResult
-import fs2.{Chunk, Pipe, Stream}
-import http.TimedResponse
+import fs2.{Chunk, Stream}
+import com.catling.internal.evaluation.latency.{Latency, LatencyEvaluator}
+import com.catling.internal.evaluation.statuscode.StatusCodeEvaluator
+import com.catling.internal.evaluation.statuscode.model.StatusCodesResult
+import com.catling.internal.http.TimedResponse
+import com.catling.loadtest.Evaluator
 
-abstract class Evaluator[T] extends Pipe[IO, Chunk[TimedResponse[String]], T] {
-  val empty: T
-}
-
-object Evaluator {
+object Evaluators {
 
   def latency: Evaluator[Latency] = LatencyEvaluator
 
   def responseCodes: Evaluator[StatusCodesResult] = new StatusCodeEvaluator
 
-  def default: Evaluator[(StatusCodesResult, Latency)] = eval2(latency, responseCodes)
+  def default: Evaluator[(StatusCodesResult, Latency)] = eval2(responseCodes, latency)
 
   def eval2[A, B](a: Evaluator[A], b: Evaluator[B]): Evaluator[(A, B)] = new Evaluator[(A, B)] {
     override val empty: (A, B) = (a.empty, b.empty)

@@ -7,3 +7,4 @@ target/
 .cache
 .history
 .lib/
+src/main/resources/test.csv

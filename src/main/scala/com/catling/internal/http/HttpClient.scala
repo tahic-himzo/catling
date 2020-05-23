@@ -1,4 +1,4 @@
-package http
+package com.catling.internal.http
 
 import java.util.concurrent.TimeUnit
 

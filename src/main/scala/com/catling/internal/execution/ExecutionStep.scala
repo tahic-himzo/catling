@@ -1,6 +1,7 @@
-package exec
+package com.catling.internal.execution
 
 import io.circe.Encoder
+import com.catling.loadtest.Executor
 
 import scala.concurrent.duration.FiniteDuration
 

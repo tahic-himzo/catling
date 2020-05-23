@@ -1,9 +1,9 @@
-package eval.latency
+package com.catling.internal.evaluation.latency
 
 import cats.effect.IO
-import eval.Evaluator
 import fs2.{Chunk, Stream}
-import http.TimedResponse
+import com.catling.internal.http.TimedResponse
+import com.catling.loadtest.Evaluator
 
 import scala.concurrent.duration._
 

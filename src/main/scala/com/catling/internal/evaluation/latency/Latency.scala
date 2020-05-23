@@ -1,4 +1,4 @@
-package eval.latency
+package com.catling.internal.evaluation.latency
 
 import cats.Show
 

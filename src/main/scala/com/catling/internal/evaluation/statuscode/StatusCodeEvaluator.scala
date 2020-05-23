@@ -1,11 +1,11 @@
-package eval.statuscode
+package com.catling.internal.evaluation.statuscode
 
 import cats.effect.IO
 import cats.implicits._
-import eval.Evaluator
-import eval.statuscode.model.{RequestCount, StatusCodes, StatusCodesResult}
 import fs2.{Chunk, Stream}
-import http.TimedResponse
+import com.catling.internal.evaluation.statuscode.model.{RequestCount, StatusCodes, StatusCodesResult}
+import com.catling.internal.http.TimedResponse
+import com.catling.loadtest.Evaluator
 
 class StatusCodeEvaluator extends Evaluator[StatusCodesResult] {
 

@@ -1,13 +1,10 @@
-package exec
+package com.catling.internal.execution
 
 import cats.data.NonEmptyList
 import cats.effect.{Concurrent, IO, Timer}
-import fs2.Pipe
-import http.{Request, TimedResponse}
+import com.catling.loadtest.Executor
 
-abstract class Executor[T, S] extends Pipe[IO, Request[T], TimedResponse[S]]
-
-object Executor {
+object Executors {
 
   def from[T, S](executors: NonEmptyList[ExecutionStep[T, S]])(implicit t: Timer[IO], c: Concurrent[IO]): Executor[T, S] =
     in => {
