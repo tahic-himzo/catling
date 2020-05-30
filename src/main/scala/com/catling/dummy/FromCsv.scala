@@ -6,13 +6,13 @@ import fs2.Pipe
 import io.circe.Json
 import sttp.model.Uri.UriContext
 
-class FromCsv(chunkSize: Int) extends Pipe[IO, Array[String], Request[Json]] {
-  override def apply(in: fs2.Stream[IO, Array[String]]): fs2.Stream[IO, Request[Json]] =
+class FromCsv(chunkSize: Int) extends Pipe[IO, Vector[String], Request[Json]] {
+  override def apply(in: fs2.Stream[IO, Vector[String]]): fs2.Stream[IO, Request[Json]] =
     in.chunkN(chunkSize)
       .map(
         c => {
           val items = c.toList.map {
-            case Array(ean, quantity) =>
+            case Vector(ean, quantity) =>
               Json.obj(("some-key", Json.fromString(ean)), ("some-value", Json.fromInt(quantity.toInt)))
           }
           val body = Json.obj(("items", Json.fromValues(items)))
