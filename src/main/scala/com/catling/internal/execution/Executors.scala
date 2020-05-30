@@ -3,10 +3,12 @@ package com.catling.internal.execution
 import cats.data.NonEmptyList
 import cats.effect.{Concurrent, IO, Timer}
 import com.catling.loadtest.Executor
+import io.circe.Encoder
 
 object Executors {
 
-  def from[T, S](executors: NonEmptyList[ExecutionStep[T, S]])(implicit t: Timer[IO], c: Concurrent[IO]): Executor[T, S] =
+  def from[T: Encoder, S](
+      executors: NonEmptyList[ExecutionStep[T, S]])(implicit t: Timer[IO], c: Concurrent[IO]): Executor[T, S] =
     in => {
       val initExec   = executors.head
       val initStream = in.through(initExec.executor).take(initExec.totalRequests)

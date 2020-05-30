@@ -1,18 +1,18 @@
 package com.catling.loadtest
 
 import cats.effect._
-import fs2.{Pipe, Stream}
 import com.catling.internal.http.Request
+import fs2.Stream
 
 import scala.concurrent.duration.FiniteDuration
 
 object LoadTest {
 
-  def from[T, S, U, X, Y](
-      ds:           Stream[IO, T],
-      prep:         Pipe[IO, T, Request[S]],
-      exec:         Executor[S, String],
+  def from[A, B, C, D](
+      ds:           Stream[IO, A],
+      prep:         DataPreparator[A, Request[B]],
+      exec:         Executor[B, C],
       evalInterval: FiniteDuration,
-      eval:         Evaluator[X])(implicit t: Timer[IO], c: Concurrent[IO]): Stream[IO, X] =
-    ds.through(prep).through(exec).groupWithin(Int.MaxValue, evalInterval).through(eval)
+      eval:         Evaluator[C, D])(implicit t: Timer[IO], c: Concurrent[IO]): Stream[IO, D] =
+    ds.through(prep).through(exec).groupWithin(Int.MaxValue, evalInterval).evalMap(c => eval(c.toList))
 }
