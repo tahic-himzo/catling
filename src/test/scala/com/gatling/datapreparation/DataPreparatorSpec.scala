@@ -13,5 +13,4 @@ class DataPreparatorSpec extends AnyWordSpec with Matchers with EitherValues {
       output.right.value shouldEqual List(1, 2, 3)
     }
   }
-
 }

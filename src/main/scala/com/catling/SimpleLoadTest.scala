@@ -20,7 +20,7 @@ object SimpleLoadTest {
       implicit t:     Timer[IO],
       ec:             ContextShift[IO],
       nep:            NonEmptyParallel[IO]): Stream[IO, (StatusCodesResult, Latency)] = {
-    val ds   = DataSources.csv("test.csv", hasHeader = true)
+    val ds   = DataSources.csv("test.csv", hasHeader = true).get
     val prep = new mstock.FromCsv(batchSize)
 
     val exec = Executors.from[Json, String](
