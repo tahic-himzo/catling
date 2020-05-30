@@ -8,7 +8,11 @@ import sttp.client.circe._
 import sttp.client.{NothingT, Response, SttpBackend}
 import sttp.model.Uri
 
-class HttpClient(implicit sttpBackend: SttpBackend[IO, Nothing, NothingT]) {
+trait HttpClient {
+  def post[A: Encoder](req: Request[A])(implicit t: Timer[IO]): IO[TimedResponse[String]]
+}
+
+class SttpHttpClient(implicit sttpBackend: SttpBackend[IO, Nothing, NothingT]) extends HttpClient {
 
   def post[A: Encoder](req: Request[A])(implicit t: Timer[IO]): IO[TimedResponse[String]] = {
     val request = sttp.client.quickRequest.headers(req.headers).post(req.url).body(req.payload)
