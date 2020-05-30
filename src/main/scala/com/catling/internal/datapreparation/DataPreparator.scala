@@ -1,7 +1,8 @@
 package com.catling.internal.datapreparation
 
-import com.catling.loadtest.DataPreparator
+import cats.effect.IO
+import fs2.Pipe
 
 object DataPreparator {
-  def passThrough[A]: DataPreparator[A, A] = in => in
+  def passThrough[A]: Pipe[IO, A, A] = in => in
 }

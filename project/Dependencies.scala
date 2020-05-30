@@ -21,4 +21,10 @@ object Dependencies {
     "com.opencsv"                  % "opencsv"                         % openCsvVersion,
     "org.tpolecat"                 %% "doobie-core"                    % doobieVersion
   )
+
+  val scalaTestVersion = "3.1.1"
+  lazy val testDeps = Seq(
+    "org.scalatest" %% "scalatest"        % scalaTestVersion,
+    "org.tpolecat"  %% "doobie-scalatest" % doobieVersion
+  ).map(_ % "it, test")
 }

@@ -2,11 +2,11 @@ package com.catling.dummy
 
 import cats.effect.IO
 import com.catling.internal.http.Request
+import fs2.Pipe
 import io.circe.Json
-import com.catling.loadtest.DataPreparator
 import sttp.model.Uri.UriContext
 
-class FromCsv(chunkSize: Int) extends DataPreparator[Array[String], Request[Json]] {
+class FromCsv(chunkSize: Int) extends Pipe[IO, Array[String], Request[Json]] {
   override def apply(in: fs2.Stream[IO, Array[String]]): fs2.Stream[IO, Request[Json]] =
     in.chunkN(chunkSize)
       .map(

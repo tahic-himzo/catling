@@ -1,10 +1,10 @@
 package com.catling.internal.execution
 
 import cats.effect.{ContextShift, IO, Timer}
-import fs2.Stream
 import com.catling.internal.http.{HttpClient, Request, TimedResponse}
-import io.circe.Encoder
 import com.catling.loadtest.Executor
+import fs2.Stream
+import io.circe.Encoder
 
 import scala.concurrent.duration.DurationDouble
 

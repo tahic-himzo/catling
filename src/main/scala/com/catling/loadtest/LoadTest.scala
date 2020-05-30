@@ -2,7 +2,7 @@ package com.catling.loadtest
 
 import cats.effect._
 import com.catling.internal.http.Request
-import fs2.Stream
+import fs2.{Pipe, Stream}
 
 import scala.concurrent.duration.FiniteDuration
 
@@ -10,7 +10,7 @@ object LoadTest {
 
   def from[A, B, C, D](
       ds:           Stream[IO, A],
-      prep:         DataPreparator[A, Request[B]],
+      prep:         Pipe[IO, A, Request[B]],
       exec:         Executor[B, C],
       evalInterval: FiniteDuration,
       eval:         Evaluator[C, D])(implicit t: Timer[IO], c: Concurrent[IO]): Stream[IO, D] =
