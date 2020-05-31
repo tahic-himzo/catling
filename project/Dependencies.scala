@@ -8,6 +8,7 @@ object Dependencies {
   val fs2Version        = "2.2.1"
   val openCsvVersion    = "5.2"
   val doobieVersion     = "0.9.0"
+  val postgresVersion   = "42.2.12"
 
   lazy val appDeps = Seq(
     "org.typelevel"                %% "cats-effect"                    % catsEffectVersion,
@@ -19,12 +20,13 @@ object Dependencies {
     "io.circe"                     %% "circe-fs2"                      % circeFs2Version,
     "co.fs2"                       %% "fs2-core"                       % fs2Version,
     "com.opencsv"                  % "opencsv"                         % openCsvVersion,
-    "org.tpolecat"                 %% "doobie-core"                    % doobieVersion
+    "org.tpolecat"                 %% "doobie-core"                    % doobieVersion,
+    "org.postgresql"               % "postgresql"                      % postgresVersion
   )
 
   val scalaTestVersion = "3.1.1"
   lazy val testDeps = Seq(
     "org.scalatest" %% "scalatest"        % scalaTestVersion,
     "org.tpolecat"  %% "doobie-scalatest" % doobieVersion
-  ).map(_ % "it, test")
+  ).map(_ % Test)
 }
