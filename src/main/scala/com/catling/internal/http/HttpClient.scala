@@ -24,5 +24,14 @@ class SttpHttpClient(implicit sttpBackend: SttpBackend[IO, Nothing, NothingT]) e
   }
 }
 
+class FakeHttpClient extends HttpClient {
+
+  def post[A: Encoder](req: Request[A])(implicit t: Timer[IO]): IO[TimedResponse[String]] =
+    for {
+      start <- t.clock.monotonic(TimeUnit.MILLISECONDS)
+      end   <- t.clock.monotonic(TimeUnit.MILLISECONDS)
+    } yield TimedResponse(Response.ok("dummy"), end - start)
+}
+
 final case class Request[T: Encoder](url:   Uri, payload:         T, headers: Map[String, String] = Map.empty)
 final case class TimedResponse[T](response: Response[T], durInMs: Long)
