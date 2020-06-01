@@ -3,6 +3,7 @@ import sbt._
 object Dependencies {
   val circeFs2Version   = "0.13.0"
   val circeVersion      = "0.13.0"
+  val circeDerivationVersion      = "0.13.0-M4"
   val catsEffectVersion = "2.1.3"
   val sttpVersion       = "2.1.1"
   val fs2Version        = "2.2.1"
@@ -17,6 +18,7 @@ object Dependencies {
     "com.softwaremill.sttp.client" %% "circe"                          % sttpVersion,
     "io.circe"                     %% "circe-core"                     % circeVersion,
     "io.circe"                     %% "circe-parser"                   % circeVersion,
+    "io.circe"                     %% "circe-derivation"               % circeDerivationVersion,
     "io.circe"                     %% "circe-fs2"                      % circeFs2Version,
     "co.fs2"                       %% "fs2-core"                       % fs2Version,
     "com.opencsv"                  % "opencsv"                         % openCsvVersion,

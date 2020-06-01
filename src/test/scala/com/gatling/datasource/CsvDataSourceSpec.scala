@@ -1,6 +1,6 @@
 package com.gatling.datasource
 
-import com.catling.internal.datasource.CsvDataSource
+import com.catling.datasource.csv.CsvDataSource
 import org.scalatest.EitherValues
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

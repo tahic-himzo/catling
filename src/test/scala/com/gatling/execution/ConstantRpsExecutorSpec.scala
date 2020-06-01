@@ -3,8 +3,8 @@ package com.gatling.execution
 import java.util.concurrent.atomic.AtomicInteger
 
 import cats.effect.{ContextShift, IO, Timer}
-import com.catling.internal.execution.ConstantRpsExecutor
-import com.catling.internal.http.Request
+import com.catling.execution.constant.ConstantRpsExecutor
+import com.catling.http.model.Request
 import http.HttpMocks
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

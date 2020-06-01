@@ -1,7 +1,7 @@
 package com.gatling.evaluation
 
-import com.catling.internal.evaluation.latency._
-import com.catling.internal.http.TimedResponse
+import com.catling.evaluation.latency._
+import com.catling.http.model.TimedResponse
 import org.scalatest.EitherValues
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

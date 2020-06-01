@@ -2,10 +2,12 @@ package com.gatling.loadtest
 
 import cats.data.NonEmptyList
 import cats.effect.{ContextShift, IO, Timer}
-import com.catling.internal.datapreparation.DataPreparator
-import com.catling.internal.execution.{ConstantRpsExecutor, ExecutionStep, Executors}
-import com.catling.internal.http.{Request, TimedResponse}
-import com.catling.loadtest.{DataSources, Evaluator, Executor, LoadTest}
+import com.catling.LoadTest
+import com.catling.datasource.DataSources
+import com.catling.evaluation.Evaluator
+import com.catling.execution.constant.ConstantRpsExecutor
+import com.catling.execution.{ExecutionStep, Executor, Executors}
+import com.catling.http.model.{Request, TimedResponse}
 import http.HttpMocks
 import org.scalatest.EitherValues
 import org.scalatest.matchers.should.Matchers
@@ -25,7 +27,6 @@ class LoadTestSpec extends AnyWordSpec with Matchers with EitherValues {
       val exec1      = new ConstantRpsExecutor[String](httpClient, 10)
       val exec2      = new ConstantRpsExecutor[String](httpClient, 20)
       val ds         = DataSources.const(Request(uri"http://localhost:8080", "dummy")).get
-      val prep       = DataPreparator.passThrough[Request[String]]
       val executor: Executor[String, String] = Executors.from(
         NonEmptyList.of(
           ExecutionStep(exec1, 5.seconds),
@@ -36,7 +37,7 @@ class LoadTestSpec extends AnyWordSpec with Matchers with EitherValues {
         override def apply(v1: List[TimedResponse[String]]): IO[String] = IO.delay("dummy")
       }
 
-      val loadTest = LoadTest.from(ds, prep, executor, 5.seconds, evaluator)
+      val loadTest = LoadTest.from(ds, executor, evaluator, 5.seconds)
       val output   = loadTest.compile.toList.attempt.unsafeRunSync()
       output.right.value shouldEqual List("dummy", "dummy")
     }

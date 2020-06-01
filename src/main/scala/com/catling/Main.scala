@@ -3,7 +3,7 @@ package com.catling
 import cats.effect.{ExitCode, IO, IOApp, Resource}
 import cats.syntax.flatMap._
 import cats.syntax.show._
-import com.catling.internal.http.FakeHttpClient
+import com.catling.sample._
 import sttp.client.asynchttpclient.cats.AsyncHttpClientCatsBackend
 import sttp.client.{NothingT, SttpBackend}
 
@@ -14,8 +14,7 @@ object Main extends IOApp {
 
   def run(args: List[String]): IO[ExitCode] = sttpBackendResource.use { implicit backend =>
     println(backend)
-    val httpClient = new FakeHttpClient
-    val dummyTest  = SimpleLoadTest.get(httpClient)(10)
+    val dummyTest = sql.SampleLoadTest.get
     dummyTest.map {
       case (result, latency) =>
         println(latency.show)

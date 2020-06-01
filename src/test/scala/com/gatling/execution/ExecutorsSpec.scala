@@ -2,8 +2,9 @@ package com.gatling.execution
 
 import cats.data.NonEmptyList
 import cats.effect.{ContextShift, IO, Timer}
-import com.catling.internal.execution.{ConstantRpsExecutor, ExecutionStep, Executors}
-import com.catling.internal.http.Request
+import com.catling.execution.constant.ConstantRpsExecutor
+import com.catling.execution.{ExecutionStep, Executors}
+import com.catling.http.model.Request
 import http.HttpMocks
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
