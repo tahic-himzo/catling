@@ -1,9 +1,9 @@
 package com.catling.sample.sql
 
 import cats.effect.{ContextShift, IO}
-import com.catling.datasource.sql.Transactors
-import com.catling.datasource.{DataSource, DataSources}
-import com.catling.http.model.Request
+import com.catling.library.datasource.sql.Transactors
+import com.catling.library.datasource.{DataSource, DataSources}
+import com.catling.library.http.model.Request
 import com.catling.sample.{SampleItem, SamplePayload, SampleRequest}
 import doobie.syntax.string.toSqlInterpolator
 

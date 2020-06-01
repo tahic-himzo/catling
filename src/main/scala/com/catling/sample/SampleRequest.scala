@@ -1,6 +1,6 @@
 package com.catling.sample
 
-import com.catling.http.model.Request
+import com.catling.library.http.model.Request
 import sttp.model.Uri.UriContext
 
 object SampleRequest {

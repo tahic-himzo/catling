@@ -2,9 +2,9 @@ package com.catling.sample
 
 import cats.data.NonEmptyList
 import cats.effect.{ContextShift, IO, Timer}
-import com.catling.execution.constant.ConstantRpsExecutor
-import com.catling.execution.{ExecutionStep, Executor, Executors}
-import com.catling.http.HttpClient
+import com.catling.library.execution.constant.ConstantRpsExecutor
+import com.catling.library.execution.{ExecutionStep, Executor, Executors}
+import com.catling.library.http.HttpClient
 
 import scala.concurrent.duration._
 

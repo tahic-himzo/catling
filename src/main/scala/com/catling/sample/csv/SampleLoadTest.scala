@@ -2,11 +2,11 @@ package com.catling.sample.csv
 
 import cats.NonEmptyParallel
 import cats.effect.{ContextShift, IO, Timer}
-import com.catling.LoadTest
-import com.catling.evaluation.Evaluators
-import com.catling.evaluation.latency.Latency
-import com.catling.evaluation.statuscode.model.StatusCodesResult
-import com.catling.http.FakeHttpClient
+import com.catling.library.LoadTest
+import com.catling.library.evaluation.Evaluators
+import com.catling.library.evaluation.latency.Latency
+import com.catling.library.evaluation.statuscode.model.StatusCodesResult
+import com.catling.library.http.FakeHttpClient
 import com.catling.sample.SampleExecutor
 import fs2.Stream
 

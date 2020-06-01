@@ -1,8 +1,8 @@
 package com.catling.sample.csv
 
 import cats.effect.IO
-import com.catling.datasource.{DataSource, DataSources}
-import com.catling.http.model.Request
+import com.catling.library.datasource.{DataSource, DataSources}
+import com.catling.library.http.model.Request
 import com.catling.sample.{SampleItem, SamplePayload, SampleRequest}
 
 class SampleCsvDataSource(batchSize: Int) extends DataSource[Request[SamplePayload]] {
