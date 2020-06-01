@@ -8,4 +8,3 @@ target/
 .history
 .lib/
 src/main/resources/test.csv
-src/main/resources/db_dump.csv
