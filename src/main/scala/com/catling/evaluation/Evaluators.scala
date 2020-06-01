@@ -14,9 +14,9 @@ object Evaluators {
 
   def responseCodes[A]: Evaluator[A, StatusCodesResult] = new StatusCodeEvaluator
 
-  def default[A](implicit nep: NonEmptyParallel[IO]): Evaluator[A, (StatusCodesResult, Latency)] = eval2(responseCodes, latency)
+  def default[A](implicit nep: NonEmptyParallel[IO]): Evaluator[A, (StatusCodesResult, Latency)] = combine(responseCodes, latency)
 
-  def eval2[A, B, C](eval1: Evaluator[A, B], eval2: Evaluator[A, C])(implicit nep: NonEmptyParallel[IO]): Evaluator[A, (B, C)] =
+  def combine[A, B, C](eval1: Evaluator[A, B], eval2: Evaluator[A, C])(implicit nep: NonEmptyParallel[IO]): Evaluator[A, (B, C)] =
     (in: List[TimedResponse[A]]) => (eval1.apply(in), eval2.apply(in)).parTupled
 
 }
