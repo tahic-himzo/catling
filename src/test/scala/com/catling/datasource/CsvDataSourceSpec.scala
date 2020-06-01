@@ -1,4 +1,4 @@
-package com.gatling.datasource
+package com.catling.datasource
 
 import com.catling.datasource.csv.CsvDataSource
 import org.scalatest.EitherValues

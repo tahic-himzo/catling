@@ -1,4 +1,4 @@
-package com.gatling.execution
+package com.catling.execution
 
 import java.util.concurrent.atomic.AtomicInteger
 

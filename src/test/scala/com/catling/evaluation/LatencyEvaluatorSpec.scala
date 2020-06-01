@@ -1,4 +1,4 @@
-package com.gatling.evaluation
+package com.catling.evaluation
 
 import com.catling.evaluation.latency._
 import com.catling.http.model.TimedResponse

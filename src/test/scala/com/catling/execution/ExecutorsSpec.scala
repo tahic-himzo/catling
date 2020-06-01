@@ -1,4 +1,4 @@
-package com.gatling.execution
+package com.catling.execution
 
 import cats.data.NonEmptyList
 import cats.effect.{ContextShift, IO, Timer}

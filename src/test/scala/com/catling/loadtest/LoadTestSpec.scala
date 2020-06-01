@@ -1,4 +1,4 @@
-package com.gatling.loadtest
+package com.catling.loadtest
 
 import cats.data.NonEmptyList
 import cats.effect.{ContextShift, IO, Timer}

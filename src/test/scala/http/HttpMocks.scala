@@ -4,7 +4,7 @@ import cats.effect.{IO, Timer}
 import cats.syntax.flatMap._
 import com.catling.http.HttpClient
 import com.catling.http.model.{Request, TimedResponse}
-import com.gatling.execution.WithCounter
+import com.catling.execution.WithCounter
 import io.circe.Encoder
 import sttp.client.Response
 
