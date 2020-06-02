@@ -22,6 +22,6 @@ lazy val root = (project in file("."))
         "-Xmacro-settings:materialize-derivations",
         "-Ypartial-unification"
       ),
-    libraryDependencies ++= appDeps ++ testDeps,
+    libraryDependencies ++= allDeps,
     scalafmtOnCompile := true
   )
