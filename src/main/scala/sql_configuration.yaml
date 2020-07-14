@@ -1,0 +1,7 @@
+---
+type: load-test-configuration
+name: sample-load-test-sql-config
+data_source: sql
+source: "./resources/sample.sql"
+target: http://localhost:8080
+transform: "./rows-to-req.scala"

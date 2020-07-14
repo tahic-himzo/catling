@@ -1,0 +1,20 @@
+---
+type: load_test_execution
+name: sample-load-test-execution
+source: "./resources/sample.csv"
+target: http://localhost:8080
+transform:
+  type: aws-lambda
+  source: "./csv-to-req.scala"
+execution_steps:
+  - type: CONSTANT_RPS
+    rps: 10
+    duration: 10 seconds
+  - type: CONSTANT_RPS
+    rps: 15
+    duration: 20 seconds
+evaluation:
+  interval: 5 seconds
+  evaluators:
+    - STATUS_CODES
+    - LATENCY
